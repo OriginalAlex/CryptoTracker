@@ -11,7 +11,7 @@ public class Stock {
 		this.name = name;
 		this.amount = amount;
 		this.value = value;
-		this.btcValue = Math.round((value / btcValue) * 1000) / 1000;
+		this.btcValue = Math.round((value / btcValue) * 100.0) / 100.0;
 	}
 	
 	public String getName() {

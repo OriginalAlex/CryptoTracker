@@ -124,6 +124,11 @@ public class Controller {
 		String currency = this.currency.getSelectionModel().getSelectedItem();
 		boolean isOther = setURL(currency);
 		double quantity = getAmount();
+		
+		if (quantity == -1) {
+			return;
+		}
+		
 		double price = co.fetchPrice();
 		
 		if (isOther) {
@@ -131,7 +136,7 @@ public class Controller {
 		} else {
 			data.add(new Stock(currency, quantity, price * quantity, this.bitcoinValue));
 		}
-
+		list.setItems(data);
 		updateTotal(price, quantity, isOther, currency);
 		clearInputs();
 	}
@@ -139,7 +144,6 @@ public class Controller {
 	private void updateTotal(double price, double quantity, boolean isOther, String currency) {
 		total += (double) Math.round(price * quantity * 100) / 100;
 		totalVal.setText("Total Value (USD): " + (total));
-		list.setItems(data);
 		if (isOther) {
 			status.setText("Satus: ADDED " + other.getText());
 		} else {
